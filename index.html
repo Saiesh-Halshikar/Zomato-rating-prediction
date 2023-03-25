@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Rating Prediction</title>
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+        }
+        body {
+            color: whitesmoke;
+            height: 100%;
+            width: calc(100vw - 33px);
+            background-image: url('https://images.unsplash.com/photo-1548943487-a2e4e43b4853?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-color: rgba(4, 41, 16, 0.31);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .container {
+            background: rgba(1, 66, 17, 0.5);
+            border-radius: 8px;
+            -webkit-box-shadow: rgba(1, 46, 9, 0.8) 0px 8px 24px;
+            -moz-box-shadow: rgba(1, 46, 9, 0.8) 0px 8px 24px;
+            box-shadow: rgba(1, 46, 9, 0.8) 0px 8px 24px;
+        }
+        .dis_center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .flex_column {
+            display: flex;
+            flex-direction: column;
+        }
+        .flex_row {
+            display: flex;
+            flex-direction: row;
+        }
+        input[type=text], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        div {
+            margin: 20px;
+        }
+        .alert {
+            position: relative;
+            padding: .75rem 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-radius: .25rem;
+        }
+        .alert_primary {
+            color: #004085;
+            background-color: #cce5ff;
+            border-color: #b8daff;
+        }
+        .alert_info {
+            color: #383d41;
+            background-color: #e2e3e5;
+            border-color: #d6d8db;
+        }
+        .btn {
+            height: 38px;
+            width: 79px;
+            border-radius: 4px;
+            border: 2px solid;
+            cursor: pointer;
+        }
+        .btn_success {
+            color: #ffff;
+            background-color:  #28a745;
+            border-color:  #28a745;
+        }
+        @media screen and (max-width: 720px) {
+            .flex_row {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <img src="https://thumbs.dreamstime.com/b/food-spoon-fork-vector-symbol-graphic-logo-design-template-food-spoon-fork-symbol-logo-design-121549456.jpg" alt="Icon" height="60px" width="100px" style="position: fixed; top: 10px; left: 10px;">
+    </div>
+    
+    <div class="dis_center">
+        <span class="alert alert_info" >Restaurant Rating Prediction in Bangalore</span>
+    </div>
+
+    <div class="dis_center">
+        <div class="container">
+            <form action="{{url_for('predict')}}" method="POST" >
+
+                <div class="flex_row">
+                    <div class="flex_column">
+                        <label for="online_order">Order Type</label>
+                        <select name="online_order" required>
+                            <option value="0">Not Online</option>
+                            <option value="1" selected>Order Online</option>
+                        </select>
+                
+                        <label for="book_table">Table</label>
+                        <select name="book_table" required>
+                            <option value="0">No Table</option>
+                            <option value="1" selected>Book Table</option>
+                        </select>
+                
+                        <label for="votes">Votes</label>
+                        <input type="text" name='votes' placeholder="787" required />
+                
+                        <label for="location">Location</label>
+                        <input type="text" name="location" placeholder="325" required />
+                    </div>
+            
+                    <div class="flex_column">
+                        <label for="rest_type">Restaurant Type</label>
+                        <input type="text" name="rest_type" placeholder="20" required />
+                
+                        <label for="cuisines">Cuisines</label>
+                        <input type="text" name="cuisines" placeholder="592" required />
+                
+                        <label for="cost">Cost</label>
+                        <input type="text" name="cost" placeholder="300.0" required />
+                
+                        <label for="menu_item">Menu Items</label>
+                        <input type="text" name="menu_item" placeholder="1000" required />
+                    </div>
+                </div>
+        
+                <div class="dis_center">
+                    <button type="submit" class="btn btn_success">Predict</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="dis_center">
+        <span class="alert alert_primary">{{ prediction_text }}</span>
+    </div>
+</body>
+</html>
